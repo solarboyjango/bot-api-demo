@@ -1,5 +1,6 @@
 import requests
 import time
+import os
 
 
 def get_messages(watermark=None):
@@ -9,11 +10,16 @@ def get_messages(watermark=None):
     else:
         print("Step 4: Getting all conversation messages...")
 
+    # Get the directory where this script is located
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    data_dir = os.path.join(script_dir, "data")
+    os.makedirs(data_dir, exist_ok=True)
+
     # Read token and conversation ID from previous steps
     try:
-        with open("token.txt", "r") as f:
+        with open(os.path.join(data_dir, "token.txt"), "r") as f:
             token = f.read().strip()
-        with open("conversation_id.txt", "r") as f:
+        with open(os.path.join(data_dir, "conversation_id.txt"), "r") as f:
             conversation_id = f.read().strip()
     except FileNotFoundError:
         print("❌ Token or conversation ID not found. Run previous steps first.")
@@ -49,7 +55,7 @@ def get_messages(watermark=None):
                 print(f"      Time: {timestamp}")
 
         # Save watermark for next check
-        with open("watermark.txt", "w") as f:
+        with open(os.path.join(data_dir, "watermark.txt"), "w") as f:
             f.write(str(new_watermark))
 
         return data
@@ -60,10 +66,15 @@ def get_messages(watermark=None):
 
 def get_current_watermark():
     """Get current watermark without displaying messages"""
+    # Get the directory where this script is located
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    data_dir = os.path.join(script_dir, "data")
+    os.makedirs(data_dir, exist_ok=True)
+
     try:
-        with open("token.txt", "r") as f:
+        with open(os.path.join(data_dir, "token.txt"), "r") as f:
             token = f.read().strip()
-        with open("conversation_id.txt", "r") as f:
+        with open(os.path.join(data_dir, "conversation_id.txt"), "r") as f:
             conversation_id = f.read().strip()
     except FileNotFoundError:
         print("❌ Token or conversation ID not found. Run previous steps first.")

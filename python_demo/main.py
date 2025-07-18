@@ -8,7 +8,7 @@ import time
 from step1_generate_token import generate_token
 from step2_start_conversation import start_conversation
 from step3_send_message import send_message
-from step4_get_messages import get_messages, poll_for_reply, get_current_watermark
+from step4_get_messages import get_messages, get_current_watermark
 from config import MESSAGE
 
 
@@ -72,11 +72,6 @@ def main():
     else:
         print("\n⚠️ Demo completed with timeout")
         print("ℹ️ Bot may still be processing your message")
-
-    print("\n📁 Generated files:")
-    print("   - token.txt (access token)")
-    print("   - conversation_id.txt (conversation ID)")
-    print("   - watermark.txt (last watermark)")
 
 
 def poll_for_reply_with_watermark(start_watermark, max_attempts=10, interval=2):

@@ -1,4 +1,11 @@
+"""
+Author: Shawn
+Date: 2025-07-19 00:41:26
+LastEditTime: 2025-07-19 01:32:10
+"""
+
 import requests
+import os
 from config import USER_ID
 
 
@@ -6,11 +13,16 @@ def send_message(message_text):
     """Step 3: Send a message to the bot"""
     print(f"Step 3: Sending message: '{message_text}'")
 
+    # Get the directory where this script is located
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    data_dir = os.path.join(script_dir, "data")
+    os.makedirs(data_dir, exist_ok=True)
+
     # Read token and conversation ID from previous steps
     try:
-        with open("token.txt", "r") as f:
+        with open(os.path.join(data_dir, "token.txt"), "r") as f:
             token = f.read().strip()
-        with open("conversation_id.txt", "r") as f:
+        with open(os.path.join(data_dir, "conversation_id.txt"), "r") as f:
             conversation_id = f.read().strip()
     except FileNotFoundError:
         print("❌ Token or conversation ID not found. Run previous steps first.")

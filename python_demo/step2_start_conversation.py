@@ -1,13 +1,19 @@
 import requests
+import os
 
 
 def start_conversation():
     """Step 2: Start a new conversation session"""
     print("Step 2: Starting conversation...")
 
+    # Get the directory where this script is located
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    data_dir = os.path.join(script_dir, "data")
+    os.makedirs(data_dir, exist_ok=True)
+
     # Read token from previous step
     try:
-        with open("token.txt", "r") as f:
+        with open(os.path.join(data_dir, "token.txt"), "r") as f:
             token = f.read().strip()
     except FileNotFoundError:
         print("❌ Token not found. Run step1_generate_token.py first.")
@@ -32,9 +38,9 @@ def start_conversation():
         print(f"   Stream URL available: {'Yes' if data.get('streamUrl') else 'No'}")
 
         # Save updated token and conversation ID
-        with open("token.txt", "w") as f:
+        with open(os.path.join(data_dir, "token.txt"), "w") as f:
             f.write(updated_token)
-        with open("conversation_id.txt", "w") as f:
+        with open(os.path.join(data_dir, "conversation_id.txt"), "w") as f:
             f.write(conversation_id)
 
         return conversation_id

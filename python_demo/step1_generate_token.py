@@ -1,10 +1,16 @@
 import requests
+import os
 from config import BOT_SECRET
 
 
 def generate_token():
     """Step 1: Generate access token using Bot Secret"""
     print("Step 1: Generating access token...")
+
+    # Get the directory where this script is located
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    data_dir = os.path.join(script_dir, "data")
+    os.makedirs(data_dir, exist_ok=True)
 
     url = "https://directline.botframework.com/v3/directline/tokens/generate"
     headers = {
@@ -25,9 +31,9 @@ def generate_token():
         print(f"   Token expires in: {data.get('expires_in')} seconds")
 
         # Save token and conversation ID for next steps
-        with open("token.txt", "w") as f:
+        with open(os.path.join(data_dir, "token.txt"), "w") as f:
             f.write(token)
-        with open("conversation_id.txt", "w") as f:
+        with open(os.path.join(data_dir, "conversation_id.txt"), "w") as f:
             f.write(conversation_id)
 
         return token, conversation_id
