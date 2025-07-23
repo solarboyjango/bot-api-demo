@@ -1,1 +1,2 @@
+# Python 3.7+ required
 requests>=2.25.1 

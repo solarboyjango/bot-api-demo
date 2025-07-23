@@ -6,6 +6,15 @@ Direct Line API 直接與我們的機器人服務對話，可以要直接控制�
 
 **重要**: 使用本 API 前，請先向我們的技術支援團隊申請 Bot Secret，這是訪問我們服務的必要憑證。
 
+## 快速開始
+
+### 程式語言範例
+
+我們提供多種程式語言的完整範例，包含所有 API 調用的實作：
+
+- 📁 [Python 範例](python_demo/) - 完整的 Python 實作
+- 🐘 [PHP 範例](php_demo/) - 完整的 PHP 實作
+
 ## 基礎資訊
 
 - **Base URL**: `https://directline.botframework.com/v3/directline`
